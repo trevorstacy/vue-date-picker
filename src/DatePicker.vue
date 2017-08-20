@@ -509,7 +509,7 @@
       },
 
       /**
-       * Returns the current month as a word e.g. 4 = April
+       * Returns the currently viewed month as a word.
        *
        * @return {String}
        */
