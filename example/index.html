@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Vue Date Picker</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      margin: auto;
+      max-width: 760px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .example {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      padding-bottom: 32px;
+    }
+
+    .example:not(:last-child) {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .example input {
+      border: 1px solid #e0e0e0;
+      border-radius: 2px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      margin-left: 16px;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="app">
+      <div class="container">
+        <div class="center"><h2>Vue Date Picker</h2></div>
+
+        <div class="example">
+          <label for="date">Select A Date:</label>
+          <input type="text" id="regular-date" readonly @focus="showRegularDate = true" v-model="regularDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#E91E63"
+                         @close="showRegularDate = false"
+                         v-if="showRegularDate"
+                         v-model="regularDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="min-date">Select A Date Starting From Today:</label>
+          <input type="text" id="min-date" readonly @focus="showMinDate = true" v-model="minDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#3F51B5"
+                         :min="minDateLimit"
+                         @close="showMinDate = false"
+                         v-if="showMinDate"
+                         v-model="minDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="max-date">Select A Date Less Than A Week From Now:</label>
+          <input type="text" id="max-date" readonly @focus="showMaxDate = true" v-model="maxDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#00BCD4"
+                         :max="maxDateLimit"
+                         @close="showMaxDate = false"
+                         v-if="showMaxDate"
+                         v-model="maxDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="range-date">Select A Date Within A Week From Now:</label>
+          <input type="text" id="range-date" readonly @focus="showRangeDate = true" v-model="rangeDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#4CAF50"
+                         :min="minDateLimit"
+                         :max="maxDateLimit"
+                         @close="showRangeDate = false"
+                         v-if="showRangeDate"
+                         v-model="rangeDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="range-date">Start At A Specified Date:</label>
+          <input type="text" id="range-date" readonly @focus="showspecifiedDate = true" v-model="specifiedDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FF9800"
+                         date="2016-4-19"
+                         @close="showspecifiedDate = false"
+                         v-if="showspecifiedDate"
+                         v-model="specifiedDate"></date-picker>
+          </transition>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../node_modules/vue/dist/vue.min.js"></script>
+
+    <script type="text/javascript" src="../dist/vue-date-picker.min.js"></script>
+
+    <script type="text/javascript">
+      Vue.use(DatePicker)
+
+      new Vue({
+        el: '.app',
+
+        created: function () {
+          var today = new Date
+
+          this.minDateLimit = '' + today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+
+          this.maxDateLimit = '' + today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7)
+        },
+
+        data: {
+          regularDate: '',
+          showRegularDate: false,
+
+          minDateLimit: '',
+          minDate: '',
+          showMinDate: false,
+
+          maxDateLimit: '',
+          maxDate: '',
+          showMaxDate: false,
+
+          rangeDate: '',
+          showRangeDate: false,
+
+          specifiedDate: '',
+          showspecifiedDate: false
+        }
+      })
+    </script>
+</body>
+</html>
