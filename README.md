@@ -6,7 +6,7 @@
 
 ## Installing
 
-`$ npm install vue-date-picker --save`
+`$ npm install vue-md-date-picker --save`
 
 `import DatePicker from 'vue-date-picker'`
 
