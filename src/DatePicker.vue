@@ -840,8 +840,6 @@
       setEscapeEvent () {
         document.addEventListener('keydown', (event) => {
           if (event.keyCode == 27 || event.key == 'Escape') {
-            this.hideBodyOverflow(false)
-
             this.onClose()
           }
         })
@@ -862,6 +860,8 @@
        * see fit.
        */
       onClose () {
+        this.hideBodyOverflow(false)
+
         this.$emit('close')
       }
     }
