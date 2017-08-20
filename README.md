@@ -82,5 +82,5 @@ You may also specifiy a color to change the theme of the date picker
 
 | Name   | Description |
 | ------ | ----------- |
-| close  | Closes the date picker. This is fired when the Ok / Cancel buttons are pressed, when the escape key is pressed, or when the input event is emitted. |
+| close  | Closes the date picker. This is fired when the Ok or Cancel buttons are pressed, when the escape key is pressed, or when the input event is emitted. |
 | input  | Sets the selected date. This is fired when the Ok button is pressed, or when the user presses the enter or space keys after selecting a date.     | 
