@@ -771,9 +771,7 @@
         // used instead of the current day.
         let date
 
-        if (this.value) {
-          date = this.specifiedDate
-        } else if (this.min) {
+        if (this.min.trim()) {
           date = new Date(this.min)
         } else {
           date = new Date()
