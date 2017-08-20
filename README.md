@@ -23,9 +23,9 @@ The most common use case
              v-model="date"></date-picker>
 ```
 
-Note that there is a `@close` event and a `v-if` directive. This is because the date picker allows you to choose when it is displayed, and how to handle closing it.
+Note that there is a `v-if` directive and a `@close` event. This is because the date picker allows you to choose when it is displayed, and how to handle closing it.
 
-Setting a minimim limit date
+Setting a min date to choose from
 
 ```html
 <input type="text" id="date" readonly @focus="show = true" v-model="date">
@@ -37,7 +37,7 @@ Setting a minimim limit date
              v-model="date"></date-picker>
 ```
 
-Setting a maximum limit date
+Setting a max date to choose from
 
 
 ```html
@@ -50,7 +50,7 @@ Setting a maximum limit date
              v-model="date"></date-picker>
 ```
 
-Setting a range of dates
+Setting a range of dates to choose from
 
 ```html
 <input type="text" id="date" readonly @focus="show = true" v-model="date">
