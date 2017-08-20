@@ -103,13 +103,13 @@
 
         <div class="example">
           <label for="range-date">Start At A Specified Date:</label>
-          <input type="text" id="range-date" readonly @focus="showspecifiedDate = true" v-model="specifiedDate">
+          <input type="text" id="range-date" readonly @focus="showSpecifiedDate = true" v-model="specifiedDate">
 
           <transition name="calendar-fade">
             <date-picker color="#FF9800"
                          date="2016-4-19"
-                         @close="showspecifiedDate = false"
-                         v-if="showspecifiedDate"
+                         @close="showSpecifiedDate = false"
+                         v-if="showSpecifiedDate"
                          v-model="specifiedDate"></date-picker>
           </transition>
         </div>
@@ -150,7 +150,7 @@
           showRangeDate: false,
 
           specifiedDate: '',
-          showspecifiedDate: false
+          showSpecifiedDate: false
         }
       })
     </script>
