@@ -71,8 +71,7 @@ There is also a provided transition if you want to fade the date picker in
 
 ```html
 <transition name="calendar-fade">
-  <date-picker color="#F44336"
-               @close="show = false"
+  <date-picker @close="show = false"
                v-if="show"
                v-model="date"></date-picker>
 </transition>
