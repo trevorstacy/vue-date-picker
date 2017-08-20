@@ -690,7 +690,7 @@
 
     methods: {
       /**
-       * Changes the display to either the calendar or years depending.
+       * Changes the display to the calendar or years depending on the value.
        */
       setSelecting (value) {
         this.selecting = value
