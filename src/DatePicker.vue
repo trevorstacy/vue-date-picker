@@ -487,11 +487,11 @@
        * @return {Date}
        */
       specifiedDate () {
-        return new Date(this.date)
+        return new Date(this.value)
       },
 
       /**
-       * Returns a date like so: 2016-4-19
+       * Returns a formatted date e.g. 2016-4-19. This is emiited on the input event.
        *
        * @return {String}
        */
@@ -620,11 +620,11 @@
           days.push(i + 1)
         }
 
-        // Map the days from numbers to objects that have selected and
-        // currentDay properties for the view.
-        const dayObjects = days.map((day) => {
-          const today = new Date()
+        // Map the days from numbers to objects that have current day,
+        // selected, and disabled properties for the view.
+        const today = new Date()
 
+        const dayObjects = days.map((day) => {
           const currentDay = (day === today.getDate()) &&
                              (this.currentMonth === today.getMonth()) &&
                              (this.currentYear === today.getFullYear())
@@ -653,7 +653,7 @@
 
         if (this.min) {
           firstYear = this.minDate.getFullYear()
-        } else if (this.date) {
+        } else if (this.value) {
           firstYear = this.specifiedDate.getFullYear()
         } else {
           firstYear = (new Date).getFullYear()
@@ -661,7 +661,7 @@
 
         // Create a range of years to loop through which is either the maximum
         // date minus the first year, or simply 100.
-        const through = this.max ? this.maxDate.getFullYear() - firstYear : 101
+        let through = this.max ? (this.maxDate.getFullYear() + 1) - firstYear : 101
 
         let years = []
 
@@ -776,7 +776,7 @@
         // used instead of the current day.
         let date
 
-        if (this.date) {
+        if (this.value) {
           date = this.specifiedDate
         } else if (this.min) {
           date = new Date(this.min)

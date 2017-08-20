@@ -107,7 +107,6 @@
 
           <transition name="calendar-fade">
             <date-picker color="#FF9800"
-                         date="2016-4-19"
                          @close="showSpecifiedDate = false"
                          v-if="showSpecifiedDate"
                          v-model="specifiedDate"></date-picker>
@@ -149,7 +148,7 @@
           rangeDate: '',
           showRangeDate: false,
 
-          specifiedDate: '',
+          specifiedDate: '2016-4-19',
           showSpecifiedDate: false
         }
       })
