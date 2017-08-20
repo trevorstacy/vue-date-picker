@@ -771,14 +771,13 @@
         // used instead of the current day.
         let date
 
-        if (this.min.trim()) {
+        if ((this.min && this.min.trim()) &&
+            (! this.value && ! this.value.trim())) {
           date = new Date(this.min)
+        } else if (this.value.trim()) {
+          date = new Date(this.value)
         } else {
           date = new Date()
-        }
-
-        if (this.value.trim()) {
-          date = new Date(this.value)
         }
 
         this.selectedDayOfWeek = date.getDay()
