@@ -459,11 +459,6 @@
         default: '#009688'
       },
 
-      date: {
-        type: String,
-        required: false
-      },
-
       min: {
         type: String,
         required: false
