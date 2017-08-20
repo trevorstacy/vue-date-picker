@@ -70,13 +70,17 @@ You may also specifiy a color to change the theme of the date picker
 
 ## API
 
-| Props | Type   | Description |
+### Props
+
+| Name  | Type   | Description |
 | ----- | ------ | --------------------------------------------- |
 | color | String | Changes the theme color of the date picker.   |
 | min   | String | Limits the date to a minimum specified value. |
 | max   | String | Limits the date to a maximum specified value. |
 
-| Events | Description |
+### Events
+
+| Name   | Description |
 | ------ | ----------- |
 | close  | Closes the date picker. This is fired when the Ok / Cancel buttons are pressed, when the escape key is pressed, or when the input event is emitted. |
 | input  | Sets the selected date. This is fired when the Ok button is pressed, or when the user presses the enter or space keys after selecting a date.     | 
