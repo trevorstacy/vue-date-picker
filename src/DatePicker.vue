@@ -487,9 +487,7 @@
        * @return {Date}
        */
       specifiedDate () {
-        const splitDate = this.date.split('-')
-
-        return new Date(splitDate[0], splitDate[1] - 1, splitDate[2])
+        return new Date(this.date)
       },
 
       /**
