@@ -15,8 +15,6 @@
 The most common use case
 
 ```html
-<input type="text" id="date" readonly @focus="show = true" v-model="date">
-
 <date-picker @close="show = false"
              v-if="show"
              v-model="date"></date-picker>
@@ -27,8 +25,6 @@ Note that there is a `v-if` directive and a `@close` event. This is because the 
 Setting a min date to choose from
 
 ```html
-<input type="text" id="date" readonly @focus="show = true" v-model="date">
-
 <date-picker min="2017-8-16"
              @close="show = false"
              v-if="show"
@@ -39,8 +35,6 @@ Setting a max date to choose from
 
 
 ```html
-<input type="text" id="date" readonly @focus="show = true" v-model="date">
-
 <date-picker max="2017-8-24"
              @close="show = false"
              v-if="show"
@@ -50,8 +44,6 @@ Setting a max date to choose from
 Setting a range of dates to choose from
 
 ```html
-<input type="text" id="date" readonly @focus="show = true" v-model="date">
-
 <date-picker min="2017-8-16"
              max="2017-8-24"
              @close="show = false"
