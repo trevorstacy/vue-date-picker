@@ -249,7 +249,7 @@
 
     <div class="calendar-container">
       <div class="calendar">
-        <header :style="{ 'background-color': color }" class="calendar-header flex-center">
+        <div :style="{ 'background-color': color }" class="calendar-header flex-center">
           <div>
             <h3 :class="{ 'calendar-faint': selecting === 'date' }"
                 @click="setSelecting('year')">
@@ -261,7 +261,7 @@
               {{ abbrivatedDay }}, {{ selectedMonthWord }} {{ selectedDay + 1 }}
             </h2>
           </div>
-        </header>
+        </div>
 
         <!-- Calendar -->
         <div class="calendar-body" v-if="selecting === 'date'">
@@ -771,10 +771,9 @@
         // used instead of the current day.
         let date
 
-        if ((this.min && this.min.trim()) &&
-            (! this.value && ! this.value.trim())) {
+        if (this.min && this.min.trim() && !this.value) {
           date = new Date(this.min)
-        } else if (this.value.trim()) {
+        } else if (this.value && this.value.trim()) {
           date = new Date(this.value)
         } else {
           date = new Date()
