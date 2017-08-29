@@ -81,7 +81,7 @@ To format the date picker's value, you may use the `:format` prop. The format pr
 </transition>
 ```
 
-In your parent component...
+In your component's methods...
 
 ```javascript
 formatDate (date) {
