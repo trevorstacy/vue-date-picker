@@ -1,6 +1,6 @@
 {
   "name": "vue-md-date-picker",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A vue date picker component inspired by material design",
   "main": "dist/vue-date-picker.js",
   "scripts": {
