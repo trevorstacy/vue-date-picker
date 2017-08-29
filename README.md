@@ -105,4 +105,4 @@ In the above example, if a user selected "2017-8-29" as the date, the `date` val
 | Name   | Description |
 | :----- | :---------- |
 | close  | Closes the date picker. This is fired when the Cancel button is pressed, when the escape key is pressed, or when the input event is emitted.         |
-| input  | Sets the selected date. This is fired when the Ok button is pressed, or when the user presses the enter or space keys after selecting a date. If a format function was passed to the date picker, the emitted value will be run through that before the input event is emitted.  | 
+| input  | Sets the selected date. This is fired when the Ok button is pressed, or when the user presses the enter or space keys after selecting a date. If a format function was passed to the date picker, the emitted value will be run through that before the input event is fire.     | 
