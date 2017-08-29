@@ -459,6 +459,11 @@
         default: '#009688'
       },
 
+      format: {
+        type: Function,
+        required: false
+      },
+
       min: {
         type: String,
         required: false
@@ -849,7 +854,9 @@
        * event and close the date picker.
        */
       onInput () {
-        this.$emit('input', this.calculatedDate)
+        const date = this.format ? this.format(this.calculatedDate) : this.calculatedDate
+
+        this.$emit('input', date)
 
         this.onClose()
       },
