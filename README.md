@@ -73,12 +73,10 @@ To format the date picker's value, you may use the `:format` prop. The format pr
 
 
 ```html
-<transition name="calendar-fade">
-  <date-picker :format="formatDate"
-               @close="show = false"
-               v-if="show"
-               v-model="date"></date-picker>
-</transition>
+<date-picker :format="formatDate"
+             @close="show = false"
+             v-if="show"
+             v-model="date"></date-picker>
 ```
 
 In your component's methods...
