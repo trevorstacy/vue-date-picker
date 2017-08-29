@@ -87,18 +87,18 @@ formatDate (date) {
 }
 ```
 
-If the user selected "2017-8-29", the date picker's value would be "August 29, 2017".
+In the above example, if a user selected "2017-8-29" as the date, the `date` value would be "August 29, 2017".
 
 ## API
 
 ### Props
 
-| Name   | Type     | Description                                                     |
-| :----- | :------- | :-------------------------------------------------------------- |
-| color  | String   | Changes the theme color of the date picker.                     |
-| format | Function | Formats the date picker's date via a user specified function.   |
-| min    | String   | Limits the date to a minimum specified value.                   |
-| max    | String   | Limits the date to a maximum specified value.                   |
+| Name   | Type     | Description                                                             |
+| :----- | :------- | :---------------------------------------------------------------------- |
+| color  | String   | Changes the theme color of the date picker.                             |
+| format | Function | Formats the date picker's emitted date via a user specified function.   |
+| min    | String   | Limits the date to a minimum specified value.                           |
+| max    | String   | Limits the date to a maximum specified value.                           |
 
 ### Events
 
