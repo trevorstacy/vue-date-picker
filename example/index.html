@@ -50,7 +50,7 @@
         <div class="center"><h2>Vue Date Picker</h2></div>
 
         <div class="example">
-          <label for="regular-date">Select A Date:</label>
+          <label for="regular-date">Select a date:</label>
           <input type="text" id="regular-date" readonly @focus="showRegularDate = true" v-model="regularDate">
 
           <transition name="calendar-fade">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="example">
-          <label for="min-date">Select A Date Starting From Today:</label>
+          <label for="min-date">Select a date starting from today:</label>
           <input type="text" id="min-date" readonly @focus="showMinDate = true" v-model="minDate">
 
           <transition name="calendar-fade">
@@ -75,7 +75,7 @@
         </div>
 
         <div class="example">
-          <label for="max-date">Select A Date Less Than A Week From Now:</label>
+          <label for="max-date">Select a date less than a week from now:</label>
           <input type="text" id="max-date" readonly @focus="showMaxDate = true" v-model="maxDate">
 
           <transition name="calendar-fade">
@@ -88,7 +88,7 @@
         </div>
 
         <div class="example">
-          <label for="range-date">Select A Date Within A Week From Now:</label>
+          <label for="range-date">Select a date within a week from now:</label>
           <input type="text" id="range-date" readonly @focus="showRangeDate = true" v-model="rangeDate">
 
           <transition name="calendar-fade">
@@ -102,7 +102,7 @@
         </div>
 
         <div class="example">
-          <label for="range-date">Start At A Specified Date:</label>
+          <label for="range-date">Start at a specified date:</label>
           <input type="text" id="range-date" readonly @focus="showSpecifiedDate = true" v-model="specifiedDate">
 
           <transition name="calendar-fade">
@@ -112,14 +112,29 @@
                          v-model="specifiedDate"></date-picker>
           </transition>
         </div>
+
+        <div class="example">
+          <label for="range-date">Format the chosen date:</label>
+          <input type="text" id="formatted-date" readonly @focus="showFormattedDate = true" v-model="formattedDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FF5722"
+                         :format="formatDate"
+                         @close="showFormattedDate = false"
+                         v-if="showFormattedDate"
+                         v-model="formattedDate"></date-picker>
+          </transition>
+        </div>
       </div>
     </div>
 
-    <script type="text/javascript" src="../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
 
-    <script type="text/javascript" src="../dist/vue-date-picker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
-    <script type="text/javascript">
+    <script src="../dist/vue-date-picker.min.js"></script>
+
+    <script>
       Vue.use(DatePicker)
 
       new Vue({
@@ -149,7 +164,16 @@
           showRangeDate: false,
 
           specifiedDate: '2016-4-19',
-          showSpecifiedDate: false
+          showSpecifiedDate: false,
+
+          formattedDate: '',
+          showFormattedDate: false
+        },
+
+        methods: {
+          formatDate: function (date) {
+            return moment(date).format('LL')
+          }
         }
       })
     </script>
