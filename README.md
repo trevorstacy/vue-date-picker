@@ -69,15 +69,38 @@ There is also a provided transition if you want to fade the date picker in
 </transition>
 ```
 
+To format the date picker's value, you may use the `:format` prop. The format prop takes a reference to a function; this function receives the date picker's date value (e.g. 2016-4-19), and formats it however you wish
+
+
+```html
+<transition name="calendar-fade">
+  <date-picker :format="formatDate"
+               @close="show = false"
+               v-if="show"
+               v-model="date"></date-picker>
+</transition>
+```
+
+In your parent component...
+
+```javascript
+formatDate (date) {
+  return moment(date).format('LL')
+}
+```
+
+If the user selected "2017-8-29", the date picker's value would be "August 29, 2017".
+
 ## API
 
 ### Props
 
-| Name  | Type   | Description                                     |
-| :---- | :----- | :---------------------------------------------- |
-| color  | String  | Changes the theme color of the date picker.   |
-| min    | String  | Limits the date to a minimum specified value. |
-| max    | String  | Limits the date to a maximum specified value. |
+| Name   | Type     | Description                                                     |
+| :----- | :------- | :-------------------------------------------------------------- |
+| color  | String   | Changes the theme color of the date picker.                     |
+| format | Function | Formats the date picker's date via a user specified function.   |
+| min    | String   | Limits the date to a minimum specified value.                   |
+| max    | String   | Limits the date to a maximum specified value.                   |
 
 ### Events
 
