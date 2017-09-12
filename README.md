@@ -4,13 +4,20 @@
 
 ![](http://i.imgur.com/YNrnrVD.png)
 
+## Contents
+
+ - [Installing](https://github.com/ridewn/vue-date-picker#installing)
+ - [Examples](https://github.com/ridewn/vue-date-picker#examples)
+ - [Formatting Selected Date](https://github.com/ridewn/vue-date-picker#formatting)
+ - [API](https://github.com/ridewn/vue-date-picker#api)
+
 ## Installing
 
 `$ npm install vue-md-date-picker --save`
 
 `import DatePicker from 'vue-md-date-picker'`
 
-## Example
+## Examples
 
 The most common use case
 
@@ -68,6 +75,8 @@ There is also a provided transition if you want to fade the date picker in
                v-model="date"></date-picker>
 </transition>
 ```
+
+## Formatting
 
 To format the date picker's value, you may use the `:format` prop. The format prop takes a reference to a function; this function receives the date picker's date value (e.g. 2016-4-19), and formats it however you wish
 
