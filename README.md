@@ -78,7 +78,7 @@ There is also a provided transition if you want to fade the date picker in
 
 ## Formatting
 
-To format the date picker's value, you may use the `:format` prop. The format prop takes a reference to a function; this function receives the date picker's date value (e.g. 2016-4-19), and my format it however you want
+To format the date picker's value, you may use the `:format` prop. The format prop takes a reference to a function; this function receives the date picker's date value (e.g. 2016-4-19) and my format it however you want
 
 
 ```html
