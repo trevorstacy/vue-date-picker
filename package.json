@@ -38,6 +38,7 @@
     "css-loader": "^0.28.5",
     "rimraf": "^2.6.1",
     "vue": "^2.2.1",
+    "js-beautify": "1.6.14",
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^11.1.4",
     "vue-style-loader": "^2.0.3",
