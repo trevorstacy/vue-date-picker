@@ -454,16 +454,16 @@ export default {
       type: Object,
       default: function() {
         return {
-          0: '1January',
-          1: '1February',
-          2: '1March',
-          3: '1April',
-          4: '1May',
-          5: '1June',
-          6: '1July',
-          7: '1August',
-          8: '1September',
-          9: '1October',
+          0: 'January',
+          1: 'February',
+          2: 'March',
+          3: 'April',
+          4: 'May',
+          5: 'June',
+          6: 'July',
+          7: 'August',
+          8: 'September',
+          9: 'October',
           10: 'November',
           11: 'December'
         }
