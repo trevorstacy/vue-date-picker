@@ -98,6 +98,66 @@ formatDate (date) {
 
 In the above example, if a user selected "2017-8-29" as the date, the `date` value would be "August 29, 2017".
 
+## Custom texts
+
+To format the date picker's month/days names you can change the following props
+```:monthMap="monthMap"
+:smallDayMap="smallDay" 
+:dayMap="dayMap"```
+
+In your component's data...
+
+```javascript
+      monthMap: {
+        0: 'January',
+        1: 'February',
+        2: 'March',
+        3: 'April',
+        4: 'May',
+        5: 'June',
+        6: 'July',
+        7: 'August',
+        8: 'September',
+        9: 'October',
+        10: 'November',
+        11: 'December'
+      },
+      dayMap: {
+        0: 'Sun',
+        1: 'Mon',
+        2: 'Tue',
+        3: 'Wed',
+        4: 'Thu',
+        5: 'Fri',
+        6: 'Sat',
+      },
+      smallDay: [
+        'S',
+        'M',
+        'T',
+        'W',
+        'T',
+        'F',
+        'S',
+      ],
+
+```html
+<date-picker :format="formatDate"
+             @close="show = false"
+             v-if="show"
+             v-model="date"></date-picker>
+```
+
+In your component's methods...
+
+```javascript
+formatDate (date) {
+  return moment(date).format('LL')
+}
+```
+
+In the above example, if a user selected "2017-8-29" as the date, the `date` value would be "August 29, 2017".
+
 ## API
 
 ### Props
