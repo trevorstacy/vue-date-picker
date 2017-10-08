@@ -4,13 +4,20 @@
 
 ![](http://i.imgur.com/YNrnrVD.png)
 
+## Contents
+
+ - [Installing](https://github.com/ridewn/vue-date-picker#installing)
+ - [Examples](https://github.com/ridewn/vue-date-picker#examples)
+ - [Formatting Selected Date](https://github.com/ridewn/vue-date-picker#formatting)
+ - [API](https://github.com/ridewn/vue-date-picker#api)
+
 ## Installing
 
 `$ npm install vue-md-date-picker --save`
 
 `import DatePicker from 'vue-md-date-picker'`
 
-## Example
+## Examples
 
 The most common use case
 
@@ -69,7 +76,9 @@ There is also a provided transition if you want to fade the date picker in
 </transition>
 ```
 
-To format the date picker's value, you may use the `:format` prop. The format prop takes a reference to a function; this function receives the date picker's date value (e.g. 2016-4-19), and formats it however you wish
+## Formatting
+
+To format the date picker's value, you may use the `:format` prop. The format prop takes a reference to a function; this function receives the date picker's date value (e.g. 2016-4-19) and may format it however you wish
 
 
 ```html
@@ -104,5 +113,5 @@ In the above example, if a user selected "2017-8-29" as the date, the `date` val
 
 | Name   | Description |
 | :----- | :---------- |
-| close  | Closes the date picker. This is fired when the Cancel button is pressed, when the escape key is pressed, or when the input event is emitted.         |
-| input  | Sets the selected date. This is fired when the Ok button is pressed, or when the user presses the enter or space keys after selecting a date. If a format function was passed to the date picker, the emitted value will be run through that before the input event is emitted.  | 
+| close  | Closes the date picker. This is fired when the Cancel button is pressed, when the escape key is pressed, or when the input event is emitted.     |
+| input  | Sets the selected date. This is fired when the Ok button is pressed, or when the user presses the enter or space key after selecting a date. If a format function is passed to the date picker, the emitted value will be run through that before this event is emitted.   |
