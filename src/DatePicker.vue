@@ -496,7 +496,11 @@
        * @return {String}
        */
       calculatedDate () {
-        return `${this.selectedYear}-${this.selectedMonth + 1}-${this.selectedDay + 1}`
+        const day = this.selectedDay + 1 >= 10 ? this.selectedDay + 1 : `0${this.selectedDay + 1}`
+
+        const month = this.selectedMonth + 1 >= 10 ? this.selectedMonth + 1 : `0${this.selectedMonth + 1}`
+
+        return `${this.selectedYear}-${month}-${day}`
       },
 
       /**
