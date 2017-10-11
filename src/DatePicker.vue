@@ -258,7 +258,7 @@
 
             <h2 :class="{ 'calendar-faint': selecting === 'year' }"
                 @click="setSelecting('date')">
-              {{ abbrivatedDay }}, {{ selectedMonthWord }} {{ selectedDay + 1 }}
+              {{ abbrivatedDay }}, {{ selectedMonthWord }} {{ selectedDay }}
             </h2>
           </div>
         </div>
@@ -482,6 +482,15 @@
 
     computed: {
       /**
+       * Returns if there was any initial date settings.
+       *
+       * @return {Boolean}
+       */
+      initialDate () {
+        return !! (this.value || this.min)
+      },
+
+      /**
        * The date property, converted to a date.
        *
        * @return {Date}
@@ -496,7 +505,7 @@
        * @return {String}
        */
       calculatedDate () {
-        const day = this.selectedDay + 1 >= 10 ? this.selectedDay + 1 : `0${this.selectedDay + 1}`
+        const day = this.selectedDay >= 10 ? this.selectedDay : `0${this.selectedDay}`
 
         const month = this.selectedMonth + 1 >= 10 ? this.selectedMonth + 1 : `0${this.selectedMonth + 1}`
 
@@ -633,7 +642,7 @@
                              (this.currentMonth === today.getMonth()) &&
                              (this.currentYear === today.getFullYear())
 
-          const selected = (this.selectedDay + 1 === day) &&
+          const selected = (this.selectedDay === day) &&
                            (this.currentMonth === this.selectedMonth) &&
                            (this.currentYear === this.selectedYear)
 
@@ -727,7 +736,7 @@
 
         this.selectedYear = this.currentYear
 
-        this.selectedDay = day.day - 1
+        this.selectedDay = day.day
 
         this.selectedMonth = this.currentMonth
 
@@ -780,17 +789,21 @@
         // used instead of the current day.
         let date
 
-        if (this.min && this.min.trim() && ! this.value) {
+        if (this.min && this.min && ! this.value) {
           date = new Date(this.min)
-        } else if (this.value && this.value.trim()) {
+        } else if (this.value && this.value) {
           date = new Date(this.value)
         } else {
           date = new Date()
         }
 
-        this.selectedDayOfWeek = date.getDay()
+        if (this.initialDate) {
+          this.selectedDay = date.getDate() + 1
+        } else {
+          this.selectedDay = date.getDate()
+        }
 
-        this.selectedDay = date.getDate() - 1
+        this.selectedDayOfWeek = date.getDay()
 
         this.selectedMonth = date.getMonth()
 
