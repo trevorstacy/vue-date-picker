@@ -2,8 +2,6 @@
 
 > A vue date picker component inspired by material design
 
-![](http://i.imgur.com/YNrnrVD.png)
-
 ## Contents
 
  - [Installing](https://github.com/ridewn/vue-date-picker#installing)
