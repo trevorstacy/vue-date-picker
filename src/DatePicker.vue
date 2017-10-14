@@ -1,248 +1,3 @@
-<style scoped>
-  *, *::before, *::after {
-      box-sizing: inherit;
-  }
-
-  div, h2, h3, h4, table, tbody, thead, tr, td, button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-
-  button {
-    border-radius: 2px;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    padding: 0 16px;
-    outline: none;
-    user-select: none;
-  }
-
-  .flex {
-    display: flex;
-  }
-
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .date-picker-container, .date-picker-background {
-    overflow-y: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .date-picker-container {
-    line-height: 1.5;
-    z-index: 9998;
-  }
-
-  .date-picker-background {
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-  }
-
-  .calendar-faint {
-    opacity: 0.75;
-  }
-
-  .calendar-container {
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 12px 52px rgba(0, 0, 0, 0.25);
-    cursor: initial;
-    position: relative;
-    user-select: text;
-    width: 350px;
-    z-index: 10001;
-    user-select: none;
-  }
-
-  .calendar {
-    height: 500px;
-    position: relative;
-  }
-
-  .calendar-header {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 28px;
-  }
-
-  .calendar-header h2, .calendar-header h3 {
-    cursor: default;
-  }
-
-  .calendar-header h2.calendar-faint, .calendar-header h3.calendar-faint {
-    cursor: pointer;
-  }
-
-  .calendar-header h2 {
-    font-size: 28px;
-    line-height: 30px;
-    margin-top: 3px;
-  }
-
-  .calendar-header h3 {
-    font-size: 1.125rem;
-    font-weight: 300;
-  }
-
-  .calendar-body {
-    padding: 16px;
-  }
-
-  .calendar-date {
-    display: flex;
-  }
-
-  .calendar-date .calendar-arrows.left {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .calendar-current-date {
-    cursor: default;
-    text-align: center;
-  }
-
-  .calendar-date .calendar-arrows.right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .calendar-date > div {
-    width: 33.333%;
-  }
-
-  .calendar-date h4 {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .calendar-arrows {
-    cursor: pointer;
-    padding: 0 8px;
-  }
-
-  .calendar-body table {
-    border-spacing: 2px;
-    border-collapse: separate;
-    cursor: default;
-    font-size: 12px;
-    margin-top: 8px;
-    table-layout: fixed;
-    text-align: center;
-    width: 100%;
-  }
-
-  .calendar-body table thead {
-    color: #757575;
-  }
-
-  .calendar-body table thead td, .calendar-body table thead td {
-    cursor: default!important;
-  }
-
-  .calendar-body tr {
-    height: 43px;
-    vertical-align: middle;
-  }
-
-  .calendar-body td {
-    border-radius: 50%;
-    cursor: pointer;
-    vertical-align: middle;
-    transition: background-color .15s;
-    width: 43px;
-  }
-
-  .calendar-body td:focus {
-    outline: none;
-  }
-
-  .calendar-body tbody td:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .calendar-body td:empty {
-    background-color: transparent!important;
-    cursor: default;
-  }
-
-  .calendar-body td.current-day {
-    font-weight: bold;
-  }
-
-  .calendar-body td.disabled {
-    color: #c5c5c5;
-    cursor: default;
-    pointer-events: none;
-  }
-
-  .calendar-body td.selected {
-    border-radius: 50%;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .calendar-year-select {
-    box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.075);
-    height: 353px;
-    overflow-y: scroll;
-    text-align: center;
-  }
-
-  .calendar-year-select div {
-    cursor: pointer;
-    padding: 8px 0;
-    transition: background-color .15s;
-  }
-
-  .calendar-year-select div:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .calendar-year-select .selected {
-    font-size: 24px;
-  }
-
-  .calendar-footer {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-  }
-
-  .calendar-footer button {
-    background-color: transparent;
-    border: 1px solid transparent;
-    box-shadow: none;
-  }
-
-  .calendar-fade-enter-active, .calendar-fade-leave-active {
-    transition: opacity .15s;
-  }
-
-  .calendar-fade-enter, .calendar-fade-leave-to {
-    opacity: 0;
-  }
-</style>
-
 <template>
   <div class="date-picker-container flex-center">
     <div class="date-picker-background flex-center" @click.stop.prevent="onClose"></div>
@@ -310,7 +65,7 @@
             </thead>
 
             <tbody>
-              <tr v-for="days in calendar">
+              <tr v-for="(index, days) in calendar" :key="index">
                 <td :style="{
                       'color': day.currentDay && ! day.selected ? color : '',
                       'background-color': day.selected ? color : ''
@@ -321,6 +76,7 @@
                       'selected': day.selected
                     }"
                     v-for="day in days"
+                    :key="`day-${day.day}`"
                     tabindex="0"
                     @keydown.enter="onInput"
                     @keydown.space.stop.prevent="onInput"
@@ -337,6 +93,7 @@
                :class="{ 'selected': year.selected }"
                :id="`${year.year}-calendar-year`"
                v-for="year in years"
+               :key="year.year"
                @click="setByYear(year.year)">
             {{ year.year }}
           </div>
@@ -890,3 +647,248 @@
     }
   }
 </script>
+
+<style scoped>
+  *, *::before, *::after {
+      box-sizing: inherit;
+  }
+
+  div, h2, h3, h4, table, tbody, thead, tr, td, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+  button {
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    padding: 0 16px;
+    outline: none;
+    user-select: none;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .date-picker-container, .date-picker-background {
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .date-picker-container {
+    line-height: 1.5;
+    z-index: 9998;
+  }
+
+  .date-picker-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+
+  .calendar-faint {
+    opacity: 0.75;
+  }
+
+  .calendar-container {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 12px 52px rgba(0, 0, 0, 0.25);
+    cursor: initial;
+    position: relative;
+    user-select: text;
+    width: 350px;
+    z-index: 10001;
+    user-select: none;
+  }
+
+  .calendar {
+    height: 500px;
+    position: relative;
+  }
+
+  .calendar-header {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+  }
+
+  .calendar-header h2, .calendar-header h3 {
+    cursor: default;
+  }
+
+  .calendar-header h2.calendar-faint, .calendar-header h3.calendar-faint {
+    cursor: pointer;
+  }
+
+  .calendar-header h2 {
+    font-size: 28px;
+    line-height: 30px;
+    margin-top: 3px;
+  }
+
+  .calendar-header h3 {
+    font-size: 1.125rem;
+    font-weight: 300;
+  }
+
+  .calendar-body {
+    padding: 16px;
+  }
+
+  .calendar-date {
+    display: flex;
+  }
+
+  .calendar-date .calendar-arrows.left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .calendar-current-date {
+    cursor: default;
+    text-align: center;
+  }
+
+  .calendar-date .calendar-arrows.right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .calendar-date > div {
+    width: 33.333%;
+  }
+
+  .calendar-date h4 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .calendar-arrows {
+    cursor: pointer;
+    padding: 0 8px;
+  }
+
+  .calendar-body table {
+    border-spacing: 2px;
+    border-collapse: separate;
+    cursor: default;
+    font-size: 12px;
+    margin-top: 8px;
+    table-layout: fixed;
+    text-align: center;
+    width: 100%;
+  }
+
+  .calendar-body table thead {
+    color: #757575;
+  }
+
+  .calendar-body table thead td, .calendar-body table thead td {
+    cursor: default!important;
+  }
+
+  .calendar-body tr {
+    height: 43px;
+    vertical-align: middle;
+  }
+
+  .calendar-body td {
+    border-radius: 50%;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background-color .15s;
+    width: 43px;
+  }
+
+  .calendar-body td:focus {
+    outline: none;
+  }
+
+  .calendar-body tbody td:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .calendar-body td:empty {
+    background-color: transparent!important;
+    cursor: default;
+  }
+
+  .calendar-body td.current-day {
+    font-weight: bold;
+  }
+
+  .calendar-body td.disabled {
+    color: #c5c5c5;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .calendar-body td.selected {
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .calendar-year-select {
+    box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.075);
+    height: 353px;
+    overflow-y: scroll;
+    text-align: center;
+  }
+
+  .calendar-year-select div {
+    cursor: pointer;
+    padding: 8px 0;
+    transition: background-color .15s;
+  }
+
+  .calendar-year-select div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .calendar-year-select .selected {
+    font-size: 24px;
+  }
+
+  .calendar-footer {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .calendar-footer button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+
+  .calendar-fade-enter-active, .calendar-fade-leave-active {
+    transition: opacity .15s;
+  }
+
+  .calendar-fade-enter, .calendar-fade-leave-to {
+    opacity: 0;
+  }
+</style>
