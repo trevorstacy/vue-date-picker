@@ -600,20 +600,11 @@
           date = new Date()
         }
 
-        if (this.initialDate) {
-          this.selectedDay = date.getDate() + 1
-        } else {
-          this.selectedDay = date.getDate()
-        }
-
+        this.selectedDay = date.getDate()
         this.selectedDayOfWeek = date.getDay()
-
         this.selectedMonth = date.getMonth()
-
         this.currentMonth = date.getMonth()
-
         this.selectedYear = date.getFullYear()
-
         this.currentYear = date.getFullYear()
       },
 
