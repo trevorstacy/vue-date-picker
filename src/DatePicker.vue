@@ -13,7 +13,7 @@
 
             <h2 :class="{ 'calendar-faint': selecting === 'year' }"
                 @click="setSelecting('date')">
-              {{ abbrivatedDay }}, {{ selectedMonthWord }} {{ selectedDay }}
+              {{ header }}
             </h2>
           </div>
         </div>
@@ -54,18 +54,12 @@
           <table>
             <thead>
               <tr>
-                <td>S</td>
-                <td>M</td>
-                <td>T</td>
-                <td>W</td>
-                <td>T</td>
-                <td>F</td>
-                <td>S</td>
+                <td v-for="(dayAbbr, index) in shortDayMap" :key="index">{{ dayAbbr }}</td>
               </tr>
             </thead>
 
             <tbody>
-              <tr v-for="(index, days) in calendar" :key="index">
+              <tr v-for="(days, index) in calendar" :key="index">
                 <td :style="{
                       'color': day.currentDay && ! day.selected ? color : '',
                       'background-color': day.selected ? color : ''
@@ -100,9 +94,9 @@
         </div>
 
         <div class="calendar-footer">
-          <button :style="{ 'color': color }" @click.stop.prevent="onClose">Cancel</button>
+          <button :style="{ 'color': color }" @click.stop.prevent="onClose">{{ buttons.cancel }}</button>
 
-          <button :style="{ 'color': color }" @click.stop.prevent="onInput">Ok</button>
+          <button :style="{ 'color': color }" @click.stop.prevent="onInput">{{ buttons.ok }}</button>
         </div>
       </div>
     </div>
@@ -122,6 +116,16 @@
     4: 'Thu',
     5: 'Fri',
     6: 'Sat',
+  }
+
+  const shortDayMap = {
+    0: 'S',
+    1: 'M',
+    2: 'T',
+    3: 'W',
+    4: 'T',
+    5: 'F',
+    6: 'S'
   }
 
   const monthMap = {
@@ -234,6 +238,36 @@
       value: {
         type: String,
         required: false
+      },
+
+      dayMap: {
+        type: Array,
+        required: false,
+        default: () => dayMap
+      },
+
+      shortDayMap: {
+        type: Array,
+        required: false,
+        default: () => shortDayMap
+      },
+
+      monthMap: {
+        type: Array,
+        required: false,
+        default: () => monthMap
+      },
+
+      buttons: {
+        type: Object,
+        required: false,
+        default: () => ({ ok: 'Ok', cancel: 'Cancel' })
+      },
+
+      headerFormat: {
+        type: String,
+        required: false,
+        default: 'abbrivatedDay, selectedMonthWord selectedDay'
       }
     },
 
@@ -275,7 +309,7 @@
        * @return {String}
        */
       abbrivatedDay () {
-        return dayMap[this.selectedDayOfWeek]
+        return this.dayMap[this.selectedDayOfWeek]
       },
 
       /**
@@ -284,7 +318,7 @@
        * @return {String}
        */
       currentMonthWord () {
-        return monthMap[this.currentMonth]
+        return this.monthMap[this.currentMonth]
       },
 
       /**
@@ -293,7 +327,7 @@
        * @return {String}
        */
       selectedMonthWord () {
-        return monthMap[this.selectedMonth]
+        return this.monthMap[this.selectedMonth]
       },
 
       /**
@@ -442,6 +476,18 @@
         return years.map((year) => {
           return { year, selected: year === this.selectedYear }
         })
+      },
+
+      /**
+       * Title of the picker modal.
+       *
+       * @return {String}
+       */
+      header() {
+        return this.headerFormat
+          .replace('abbrivatedDay', this.abbrivatedDay)
+          .replace('selectedMonthWord', this.selectedMonthWord)
+          .replace('selectedDay', this.selectedDay)
       }
     },
 
@@ -554,20 +600,11 @@
           date = new Date()
         }
 
-        if (this.initialDate) {
-          this.selectedDay = date.getDate() + 1
-        } else {
-          this.selectedDay = date.getDate()
-        }
-
+        this.selectedDay = date.getDate()
         this.selectedDayOfWeek = date.getDay()
-
         this.selectedMonth = date.getMonth()
-
         this.currentMonth = date.getMonth()
-
         this.selectedYear = date.getFullYear()
-
         this.currentYear = date.getFullYear()
       },
 

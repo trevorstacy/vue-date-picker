@@ -100,12 +100,17 @@ In the above example, if a user selected "2017-8-29" as the date, the `date` val
 
 ### Props
 
-| Name   | Type     | Description                                                             |
-| :----- | :------- | :---------------------------------------------------------------------- |
-| color  | String   | Changes the theme color of the date picker.                             |
-| format | Function | Formats the date picker's emitted date via a user specified function.   |
-| min    | String   | Limits the date to a minimum specified value.                           |
-| max    | String   | Limits the date to a maximum specified value.                           |
+| Name         | Type     | Description                                                                                             |
+| :----------- | :------- | :------------------------------------------------------------------------------------------------------ |
+| color        | String   | Changes the theme color of the date picker.                                                             |
+| format       | Function | Formats the date picker's emitted date via a user specified function.                                   |
+| min          | String   | Limits the date to a minimum specified value.                                                           |
+| max          | String   | Limits the date to a maximum specified value.                                                           |
+| dayMap       | Array    | Array of day names. (starting with sunday)                                                              |
+| shortDayMap  | Array    | Array of one letter abbreviated day names.                                                              |
+| monthMap     | Array    | Array of month names.                                                                                   |
+| buttons      | Object   | Button labels (provide keys `ok` and `cancel`)                                                          |
+| headerFormat | String   | A string where the placeholders `abbrivatedDay`, `selectedMonthWord` and `selectedDay` are substituted. |
 
 ### Events
 
