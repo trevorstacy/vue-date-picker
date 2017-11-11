@@ -1,5 +1,5 @@
 <template>
-  <div class="date-picker-container flex-center" :class="{'hidden-footer': closeOnDaySelect }">
+  <div class="date-picker-container flex-center" :class="{'hidden-footer': footer }">
     <div class="date-picker-background flex-center" @click.stop.prevent="onClose"></div>
 
     <div class="calendar-container">
@@ -99,7 +99,7 @@
           </div>
         </div>
 
-        <div class="calendar-footer" v-if="!closeOnDaySelect">
+        <div class="calendar-footer" v-if="! footer">
           <button :style="{ 'color': color }" @click.stop.prevent="onClose">Cancel</button>
 
           <button :style="{ 'color': color }" @click.stop.prevent="onInput">Ok</button>
@@ -236,7 +236,7 @@
         required: false
       },
 
-       closeOnDaySelect: {
+       footer: {
          type: Boolean,
          required: false,
          default: false
@@ -505,7 +505,7 @@
 
         this.selectedDayOfWeek = new Date(this.selectedYear, this.selectedMonth, day.day).getDay()
 
-        if (this.closeOnDaySelect) {
+        if (this.footer) {
           this.onInput();
         }
       },
