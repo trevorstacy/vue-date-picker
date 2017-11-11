@@ -1,5 +1,5 @@
 <template>
-  <div class="date-picker-container flex-center">
+  <div class="date-picker-container flex-center" :class="{'hidden-footer': closeOnDaySelect }">
     <div class="date-picker-background flex-center" @click.stop.prevent="onClose"></div>
 
     <div class="calendar-container">
@@ -65,7 +65,7 @@
             </thead>
 
             <tbody>
-              <tr v-for="(index, days) in calendar" :key="index">
+              <tr v-for="(days, index) in calendar" :key="index">
                 <td :style="{
                       'color': day.currentDay && ! day.selected ? color : '',
                       'background-color': day.selected ? color : ''
@@ -99,7 +99,7 @@
           </div>
         </div>
 
-        <div class="calendar-footer">
+        <div class="calendar-footer" v-if="!closeOnDaySelect">
           <button :style="{ 'color': color }" @click.stop.prevent="onClose">Cancel</button>
 
           <button :style="{ 'color': color }" @click.stop.prevent="onInput">Ok</button>
@@ -234,7 +234,13 @@
       value: {
         type: String,
         required: false
-      }
+      },
+
+       closeOnDaySelect: {
+         type: Boolean,
+         required: false,
+         default: false
+       }
     },
 
     computed: {
@@ -498,6 +504,10 @@
         this.selectedMonth = this.currentMonth
 
         this.selectedDayOfWeek = new Date(this.selectedYear, this.selectedMonth, day.day).getDay()
+
+        if (this.closeOnDaySelect) {
+          this.onInput();
+        }
       },
 
       /**
@@ -722,6 +732,10 @@
     position: relative;
   }
 
+  .hidden-footer .calendar {
+    height: 470px;
+  }
+
   .calendar-header {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -856,6 +870,10 @@
     height: 353px;
     overflow-y: scroll;
     text-align: center;
+  }
+
+  .hidden-footer .calendar-year-select {
+    height: 378px;
   }
 
   .calendar-year-select div {
