@@ -54,13 +54,13 @@
           <table>
             <thead>
               <tr>
-                <td>S</td>
-                <td>M</td>
-                <td>T</td>
-                <td>W</td>
-                <td>T</td>
-                <td>F</td>
-                <td>S</td>
+                <td>{{this.getSmallDay(0)}}</td>
+                <td>{{this.getSmallDay(1)}}</td>
+                <td>{{this.getSmallDay(2)}}</td>
+                <td>{{this.getSmallDay(3)}}</td>
+                <td>{{this.getSmallDay(4)}}</td>
+                <td>{{this.getSmallDay(5)}}</td>
+                <td>{{this.getSmallDay(6)}}</td>
               </tr>
             </thead>
 
@@ -100,9 +100,9 @@
         </div>
 
         <div class="calendar-footer" v-if="! footer">
-          <button :style="{ 'color': color }" @click.stop.prevent="onClose">Cancel</button>
+          <button :style="{ 'color': color }" @click.stop.prevent="onClose">{{this.cancelLabel}}</button>
 
-          <button :style="{ 'color': color }" @click.stop.prevent="onInput">Ok</button>
+          <button :style="{ 'color': color }" @click.stop.prevent="onInput">{{this.okLabel}}</button>
         </div>
       </div>
     </div>
@@ -110,35 +110,6 @@
 </template>
 
 <script>
-  /**
-   * Helpers for no dependencies™
-   */
-
-  const dayMap = {
-    0: 'Sun',
-    1: 'Mon',
-    2: 'Tue',
-    3: 'Wed',
-    4: 'Thu',
-    5: 'Fri',
-    6: 'Sat',
-  }
-
-  const monthMap = {
-    0: 'January',
-    1: 'February',
-    2: 'March',
-    3: 'April',
-    4: 'May',
-    5: 'June',
-    6: 'July',
-    7: 'August',
-    8: 'September',
-    9: 'October',
-    10: 'November',
-    11: 'December'
-  }
-
   // Thanks, Lodash.
 
   /**
@@ -240,7 +211,66 @@
          type: Boolean,
          required: false,
          default: false
-       }
+       },
+
+      monthMap: {
+        type: Object,
+        required: false,
+        default: {
+          0: 'January',
+          1: 'February',
+          2: 'March',
+          3: 'April',
+          4: 'May',
+          5: 'June',
+          6: 'July',
+          7: 'August',
+          8: 'September',
+          9: 'October',
+          10: 'November',
+          11: 'December'
+        }
+      },
+
+      dayMap: {
+        type: Object,
+        required: false,
+        default: {
+          0: 'Sun',
+          1: 'Mon',
+          2: 'Tue',
+          3: 'Wed',
+          4: 'Thu',
+          5: 'Fri',
+          6: 'Sat',
+        }
+      },
+
+      smallDayMap: {
+        type: Object,
+        required: false,
+        default: {
+          0: 'S',
+          1: 'M',
+          2: 'T',
+          3: 'W',
+          4: 'T',
+          5: 'F',
+          6: 'S',
+        }
+      },
+
+      cancelLabel: {
+        type: String,
+        required: false,
+        default: 'Cancel'
+      },
+
+      okLabel: {
+        type: String,
+        required: false,
+        default: 'Ok'
+      }
     },
 
     computed: {
@@ -281,7 +311,7 @@
        * @return {String}
        */
       abbrivatedDay () {
-        return dayMap[this.selectedDayOfWeek]
+        return this.dayMap[this.selectedDayOfWeek]
       },
 
       /**
@@ -290,7 +320,7 @@
        * @return {String}
        */
       currentMonthWord () {
-        return monthMap[this.currentMonth]
+        return this.monthMap[this.currentMonth]
       },
 
       /**
@@ -299,7 +329,7 @@
        * @return {String}
        */
       selectedMonthWord () {
-        return monthMap[this.selectedMonth]
+        return this.monthMap[this.selectedMonth]
       },
 
       /**
@@ -653,6 +683,15 @@
         this.hideBodyOverflow(false)
 
         this.$emit('close')
+      },
+
+      /**
+       * Gets the small day label
+       *
+       * @param  {Integer}
+       */
+      getSmallDay (dayOfWeek) {
+        return this.smallDayMap[dayOfWeek]
       }
     }
   }

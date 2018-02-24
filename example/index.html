@@ -125,6 +125,22 @@
                          v-model="formattedDate"></date-picker>
           </transition>
         </div>
+        <div class="example">
+          <label for="spanish-date">Select a date in spanish:</label>
+          <input type="text" id="spanish-date" readonly @focus="showSpanishDate = true" v-model="spanishDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FFC400"
+                         @close="showSpanishDate = false"
+                         :month-map="spanishMonthMap"
+                         :day-map="spanishDayMap"
+                         :small-day-map="spanishSmallDayMap"
+                         cancel-label="Cancelar"
+                         ok-label="Listo"
+                         v-if="showSpanishDate"
+                         v-model="spanishDate"></date-picker>
+          </transition>
+        </div>
       </div>
     </div>
 
@@ -167,7 +183,42 @@
           showSpecifiedDate: false,
 
           formattedDate: '',
-          showFormattedDate: false
+          showFormattedDate: false,
+
+          spanishDate: '',
+          showSpanishDate: false,
+          spanishMonthMap: {
+            0: 'Enero',
+            1: 'Febrero',
+            2: 'Marzo',
+            3: 'Abril',
+            4: 'Mayo',
+            5: 'Junio',
+            6: 'Julio',
+            7: 'Agosto',
+            8: 'Septiembre',
+            9: 'Octubre',
+            10: 'Noviembre',
+            11: 'Diciembre'
+          },
+          spanishDayMap: {
+            0: 'Dom',
+            1: 'Lun',
+            2: 'Mar',
+            3: 'Mié',
+            4: 'Jue',
+            5: 'Vie',
+            6: 'Sáb'
+          },
+          spanishSmallDayMap: {
+            0: 'D',
+            1: 'L',
+            2: 'Ma',
+            3: 'Mi',
+            4: 'J',
+            5: 'V',
+            6: 'S'
+          }
         },
 
         methods: {
