@@ -75,8 +75,8 @@
                       'disabled': day.disabled,
                       'selected': day.selected
                     }"
-                    v-for="day in days"
-                    :key="`day-${day.day}`"
+                    v-for="(day, index) in days"
+                    :key="`day-${index}-${day.day}`"
                     tabindex="0"
                     @keydown.enter="onInput"
                     @keydown.space.stop.prevent="onInput"
