@@ -1,0 +1,63 @@
+@mixin respond-to($size) {
+    @if $size == mobile {
+        @media (max-width: 550px) {
+            @content
+        }
+    }
+    @if $size == tablet {
+        @media (max-width: 1024px) {
+            @content
+        }
+    }
+    @if $size == desktop {
+        @media (min-width: 1025px) {
+            @content
+        }
+    }
+}
+
+@mixin from-sprite($pathToSprite, $positionX, $positionY) {
+    background: {
+        image: url("#{$pathToSprite}");
+        position: $positionX $positionY;
+    }
+}
+
+@mixin text-ellipsis() {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin clear-fix() {
+    &::after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+}
+
+// bistro-specific colors
+$color-bistro-red: #B11A29; // in case of change - it's also used in DatePickerComponent.vue
+$color-bistro-disabled: #999999;
+$color-bistro-green: #639917;
+$color-bistro-lighter-gray: #EFEFEF;
+$color-bistro-light-gray: #D1D1D1;
+$color-bistro-medium-gray: #757575;
+$color-bistro-dark-gray: #666666;
+$color-bistro-darker-gray: #535353;
+$color-bistro-blue: #138AB2;
+
+// custom colors
+$color-disabled: rgba(255,255,255,.4);
+$color-disabled-brighter: rgba(255,255,255,.7);
+$color-disabled-brightest: rgba(255,255,255,.85);
+$color-box-icon: #999999;
+
+// widths
+$width-page: 1100px;
+$width-sidebar: 250px;
+$width-sidebar-logo: 80px;
+
+// heights
+$height-sidebar-logo: 80px;
