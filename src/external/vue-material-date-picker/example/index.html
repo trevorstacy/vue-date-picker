@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Vue Date Picker</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      margin: auto;
+      max-width: 760px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .example {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      padding-bottom: 32px;
+    }
+
+    .example:not(:last-child) {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .example input {
+      border: 1px solid #e0e0e0;
+      border-radius: 2px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      margin-left: 16px;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="app">
+      <div class="container">
+        <div class="center"><h2>Vue Date Picker</h2></div>
+
+        <div class="example">
+          <label for="regular-date">Select a date:</label>
+          <input type="text" id="regular-date" readonly @focus="showRegularDate = true" v-model="regularDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#E91E63"
+                         @close="showRegularDate = false"
+                         v-if="showRegularDate"
+                         v-model="regularDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="min-date">Select a date starting from today:</label>
+          <input type="text" id="min-date" readonly @focus="showMinDate = true" v-model="minDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#3F51B5"
+                         :min="minDateLimit"
+                         @close="showMinDate = false"
+                         v-if="showMinDate"
+                         v-model="minDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="max-date">Select a date less than a week from now:</label>
+          <input type="text" id="max-date" readonly @focus="showMaxDate = true" v-model="maxDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#00BCD4"
+                         :max="maxDateLimit"
+                         @close="showMaxDate = false"
+                         v-if="showMaxDate"
+                         v-model="maxDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="range-date">Select a date within a week from now:</label>
+          <input type="text" id="range-date" readonly @focus="showRangeDate = true" v-model="rangeDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#4CAF50"
+                         :min="minDateLimit"
+                         :max="maxDateLimit"
+                         @close="showRangeDate = false"
+                         v-if="showRangeDate"
+                         v-model="rangeDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="spec-date">Start at a specified date:</label>
+          <input type="text" id="spec-date" readonly @focus="showSpecifiedDate = true" v-model="specifiedDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FF9800"
+                         @close="showSpecifiedDate = false"
+                         v-if="showSpecifiedDate"
+                         v-model="specifiedDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="range-date">Format the chosen date:</label>
+          <input type="text" id="formatted-date" readonly @focus="showFormattedDate = true" v-model="formattedDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FF5722"
+                         :format="formatDate"
+                         @close="showFormattedDate = false"
+                         v-if="showFormattedDate"
+                         v-model="formattedDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="translation-date">Add custom translations:</label>
+          <input type="text" id="translation-date" readonly @focus="showTranslatedDate = true" v-model="translatedDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FF5722"
+                         @close="showTranslatedDate = false"
+                         v-if="showTranslatedDate"
+                         :translations="translations"
+                         v-model="translatedDate"></date-picker>
+          </transition>
+        </div>
+
+        <div class="example">
+          <label for="wd-format-date">Different week days format:</label>
+          <input type="text" id="wd-format-date" readonly @focus="showWeekDaysFormatDate = true" v-model="weekDaysFormatDate">
+
+          <transition name="calendar-fade">
+            <date-picker color="#FF5723"
+                         @close="showWeekDaysFormatDate = false"
+                         v-if="showWeekDaysFormatDate"
+                         week-format="Mon-to-Sun"
+                         v-model="weekDaysFormatDate"></date-picker>
+          </transition>
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script src="../dist/vue-material-date-picker.min.js"></script>
+
+    <script>
+      Vue.use(DatePicker);
+
+      new Vue({
+        el: '.app',
+
+        created: function () {
+          var today = new Date
+
+          this.minDateLimit = '' + today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+
+          this.maxDateLimit = '' + today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7)
+        },
+
+        data: {
+          regularDate: '',
+          showRegularDate: false,
+
+          minDateLimit: '',
+          minDate: '',
+          showMinDate: false,
+
+          maxDateLimit: '',
+          maxDate: '',
+          showMaxDate: false,
+
+          rangeDate: '',
+          showRangeDate: false,
+
+          specifiedDate: '2016-4-19',
+          showSpecifiedDate: false,
+
+          formattedDate: '',
+          showFormattedDate: false,
+
+          translations: {
+              dayMap: {
+                  0: 'Abc',
+                  1: 'Def',
+                  2: 'Ghi',
+                  3: 'Jkl',
+                  4: 'Mno',
+                  5: 'Pqr',
+                  6: 'Stu'
+              },
+              monthMap: {
+                  0: 'Abcdef',
+                  1: 'Ghijkl',
+                  2: 'Mnopqr',
+                  3: 'Stuvwxyz',
+                  4: 'Zxywvut',
+                  5: 'Srqponml',
+                  6: 'Kjihgf',
+                  7: 'Edcba',
+                  8: 'Opqrstu',
+                  9: 'Vwxyzabc',
+                  10: 'Defghij',
+                  11: 'Klmnopqrs'
+              },
+              shortDayMap: {
+                  0: 'A',
+                  1: 'B',
+                  2: 'C',
+                  3: 'D',
+                  4: 'E',
+                  5: 'F',
+                  6: 'G'
+              },
+              cancelButtonText: 'Abcdef',
+              submitButtonText: 'Gh'
+          },
+          translatedDate: '',
+          showTranslatedDate: false,
+
+          weekDaysFormatDate: '',
+          showWeekDaysFormatDate: false,
+        },
+
+        methods: {
+          formatDate: function (date) {
+            return moment(date).format('LL')
+          }
+        }
+      })
+    </script>
+</body>
+</html>
