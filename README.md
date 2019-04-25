@@ -20,9 +20,11 @@
 The most common use case
 
 ```html
-<date-picker @close="show = false"
-             v-if="show"
-             v-model="date"></date-picker>
+<DatePicker
+  v-if="show"
+  v-model="date"
+  @close="show = false"
+/>
 ```
 
 Note that there is a `v-if` directive and a `@close` event. This is because the date picker allows you to choose when it is displayed, and how to handle closing it.
@@ -30,47 +32,57 @@ Note that there is a `v-if` directive and a `@close` event. This is because the 
 Setting a min date to choose from
 
 ```html
-<date-picker min="2017-8-16"
-             @close="show = false"
-             v-if="show"
-             v-model="date"></date-picker>
+<DatePicker
+  v-if="show"
+  v-model="date"
+  @close="show = false"
+  min="2017-8-16"
+/>
 ```
 
 Setting a max date to choose from
 
 
 ```html
-<date-picker max="2017-8-24"
-             @close="show = false"
-             v-if="show"
-             v-model="date"></date-picker>
+<DatePicker
+  v-if="show"
+  v-model="date"
+  @close="show = false"
+  max="2017-8-24"
+/>
 ```
 
 Setting a range of dates to choose from
 
 ```html
-<date-picker min="2017-8-16"
-             max="2017-8-24"
-             @close="show = false"
-             v-if="show"
-             v-model="date"></date-picker>
+<date-picker
+  v-if="show"
+  v-model="date"
+  @close="show = false"
+  min="2017-8-16"
+  max="2017-8-24"
+/>
 ```
 
 You may also specifiy a color to change the theme of the date picker
 
 ```html
-<date-picker color="#F44336"
-             @close="show = false"
-             v-if="show"
-             v-model="date"></date-picker>
+<DatePicker
+  color="#F44336"
+  @close="show = false"
+  v-if="show"
+  v-model="date"
+/>
 ```
 There is also a provided transition if you want to fade the date picker in
 
 ```html
 <transition name="calendar-fade">
-  <date-picker @close="show = false"
-               v-if="show"
-               v-model="date"></date-picker>
+  <DatePicker
+    @close="show = false"
+    v-if="show"
+    v-model="date"
+  />
 </transition>
 ```
 
@@ -80,10 +92,12 @@ To format the date picker's value, you may use the `:format` prop. The format pr
 
 
 ```html
-<date-picker :format="formatDate"
-             @close="show = false"
-             v-if="show"
-             v-model="date"></date-picker>
+<DatePicker
+  v-if="show"
+  v-model="date"
+  @close="show = false"
+  :format="formatDate"
+/>
 ```
 
 In your component's methods...
